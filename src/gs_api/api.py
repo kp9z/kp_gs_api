@@ -21,7 +21,7 @@ class GoogleSheetsAPI:
         self.spreadsheet_id = self._get_google_sheet_id(spreadsheet_link)
     
 
-    def _get_google_sheet_id(url):
+    def _get_google_sheet_id(self,url):
         # regex to get id from google sheet link python
         regex = r"spreadsheets\/d\/(.*?)\/"
         match = re.search(regex, url)
