@@ -6,6 +6,16 @@ import re
 
 class GoogleSheetsAPI:
     def __init__(self, spreadsheet_link) -> None:
+        """
+        Initializes a new instance of the Spreadsheet class.
+
+        Args:
+            spreadsheet_link (str): The link to the Google Sheets spreadsheet.
+
+        Returns:
+            None
+        """
+
         self.service = self._get_service()
         self.sheet_services = self.service.spreadsheets()
         self.spreadsheet_id = self._get_google_sheet_id(spreadsheet_link)
