@@ -36,7 +36,7 @@ class GoogleSheetsAPI:
         service = discovery.build('sheets', 'v4', credentials=credentials)
         return service
 
-    def get_data(self, range, to_dataframe=True):
+    def get_data(self, data_range, to_dataframe=True):
         """
         Retrieves data from a Google Sheet.
 
@@ -47,7 +47,7 @@ class GoogleSheetsAPI:
         Returns:
         list or pandas.DataFrame: The retrieved data.
         """
-        request = self.sheet_services.values().get(spreadsheetId=self.spreadsheet_id, range=range)
+        request = self.sheet_services.values().get(spreadsheetId=self.spreadsheet_id, range=data_range)
         response = request.execute()
         response = response.get('values', [])
         if to_dataframe:
@@ -72,7 +72,7 @@ class GoogleSheetsAPI:
         header_row = df.iloc[0]
         return pd.DataFrame(df.values[1:], columns=header_row)
 
-    def update_data(self, data, range, from_dataframe=True):
+    def update_data(self, data, data_range, from_dataframe=True):
         """
         Updates data in a Google Sheet.
 
@@ -86,13 +86,15 @@ class GoogleSheetsAPI:
         """
         value_input_option = 'USER_ENTERED'
         if from_dataframe:
-            data = data.where(pd.notnull(data), None)
+            data = data.fillna('')
             data_list = [data.columns.values.tolist()]
             data = data_list + data.values.tolist()
+        else:
+            data = [[str(cell) if cell is not None else '' for cell in row] for row in data]
         value_range_body = {
             'values': data,
         }
-        request = self.sheet_services.values().update(spreadsheetId=self.spreadsheet_id, range=range, valueInputOption=value_input_option, body=value_range_body)
+        request = self.sheet_services.values().update(spreadsheetId=self.spreadsheet_id, range=data_range, valueInputOption=value_input_option, body=value_range_body)
         response = request.execute()
         return response
 
