@@ -14,7 +14,7 @@ pip install git+https://github.com/kp9z/kp_gs_api
 
 To use this package, you will need to have a Google Cloud Platform project set up and have created a service account with the appropriate credentials. 
 
-Download 'client_secret.json' from Google API Console and rename them as 'gs_secret.json'
+Download 'client_secret.json' from Google API Console and rename them as **'gs_secret.json'**
 
 You will also need to have a Google Sheet that you want to interact with.
 
