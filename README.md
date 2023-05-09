@@ -19,7 +19,7 @@ Download 'client_secret.json' from Google API Console and rename them as **'gs_s
 You will also need to have a Google Sheet that you want to interact with.
 
 ```python
-from google_sheets_api import GoogleSheetsAPI
+from gs_api import GoogleSheetsAPI
 
 # Initialize the GoogleSheetsAPI object with the link to your Google Sheet
 sheet = GoogleSheetsAPI('https://docs.google.com/spreadsheets/d/your_sheet_id/edit#gid=0')
