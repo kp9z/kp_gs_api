@@ -98,7 +98,7 @@ class GoogleSheetsAPI:
         response = request.execute()
         return response
 
-    def append_data(self, data, range):
+    def append_data(self, data, range,from_dataframe = True):
         """
         Appends data to a Google Sheet.
 
@@ -109,6 +109,10 @@ class GoogleSheetsAPI:
         Returns:
         None
         """
+        if from_dataframe:
+            # replace NaN values with empty strings
+            data = pd.DataFrame(data).fillna('').values.tolist()
+
         resource = {
             "majorDimension": "ROWS",
             "values": data
