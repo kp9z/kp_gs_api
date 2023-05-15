@@ -22,16 +22,17 @@ You will also need to have a Google Sheet that you want to interact with.
 from gs_api import GoogleSheetsAPI
 
 # Initialize the GoogleSheetsAPI object with the link to your Google Sheet
-sheet = GoogleSheetsAPI('https://docs.google.com/spreadsheets/d/your_sheet_id/edit#gid=0')
+sheet_services = GoogleSheetsAPI('https://docs.google.com/spreadsheets/d/your_sheet_id/edit#gid=0')
 
 # Retrieve data from a range in the Google Sheet
-data = sheet.get_data('Sheet1!A1:B10')
+input_sheet = 'Sheet1!A1:B10'
+data = sheet_services.get_data(input_sheet)
 
 # Update data in a range in the Google Sheet
 new_data = [['John', 'Doe'], ['Jane', 'Doe']]
-sheet.update_data(new_data, 'Sheet1!A11:B12')
+sheet_services.update_data(new_data, 'Sheet1!A11:B12')
 
 # Append data to a range in the Google Sheet
 new_data = [['John', 'Doe'], ['Jane', 'Doe']]
-sheet.append_data(new_data, 'Sheet1!A11:B12')
+sheet_services.append_data(new_data, 'Sheet1!A11:B12')
 ```
